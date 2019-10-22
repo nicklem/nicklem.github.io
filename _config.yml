@@ -16,8 +16,7 @@
 author: Nicola Klemenc
 title: Tripping On Data
 linkedin: https://www.linkedin.com/in/nicola-klemenc-4bb550135/
-description: >- # this means to ignore newlines until "baseurl:"
-  A mixed bag of personal projects and articles on Data Science.
+description: Articles and Tutorials on Data Science
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: trippingondata
