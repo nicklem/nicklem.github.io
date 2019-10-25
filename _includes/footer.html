@@ -28,4 +28,16 @@
 
     </div>
 
+    <script>
+        // Crap snippet to fix dataframe display.
+        Array.prototype.slice.call(
+            document.querySelectorAll('.dataframe')
+        ).map(function(el) {
+            console.log(el.parentNode.setAttribute(
+                'style',
+                'max-height: 500px; overflow: auto; margin-bottom: 30px'
+            ))
+        });
+    </script>
+
 </footer>
