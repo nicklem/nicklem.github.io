@@ -14,19 +14,24 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 author: Nicola Klemenc
-title: Tripping On Data
-linkedin: https://www.linkedin.com/in/nicola-klemenc-4bb550135/
-description: Articles and Tutorials on Data Science
+title: Nicola Klemenc
+description: Software Engineer
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: trippingondata
-github_username:  nicklem
+# twitter_username: trippingondata
+github_url: https://github.com/nicklem
+gitlab_url: https://gitlab.com/nicklem1
+linkedin_url: https://www.linkedin.com/in/nicola-klemenc-4bb550135/
+collections:
+  - projects
 
 # Build settings
 markdown: kramdown
-theme: minima
+# theme: minimal-mistakes-jekyll
+remote_theme: "mmistakes/minimal-mistakes@4.17.2"
 plugins:
   - jekyll-feed
+  - jekyll-include-cache
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
