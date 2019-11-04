@@ -13,25 +13,31 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-author: Nicola Klemenc
-title: Nicola Klemenc
-description: Software Engineer
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-# twitter_username: trippingondata
-github_url: https://github.com/nicklem
-gitlab_url: https://gitlab.com/nicklem1
-linkedin_url: https://www.linkedin.com/in/nicola-klemenc-4bb550135/
-collections:
-  - projects
+title: Nicola Klemenc - Software Engineer
+email:
+description: >- # this means to ignore newlines until "baseurl:"
+  Articles and notes on computer science
+# twitter_username: username
+github_username: username
+gitlab_username: username
+minimal_mistakes_skin: default
+search: true
 
 # Build settings
 markdown: kramdown
-# theme: minimal-mistakes-jekyll
-remote_theme: "mmistakes/minimal-mistakes@4.17.2"
-plugins:
-  - jekyll-feed
-  - jekyll-include-cache
+theme: minimal-mistakes-jekyll
+#remote_theme: mmistakes/minimal-mistakes
+# Outputting
+permalink: /:categories/:title/
+paginate: 5 # amount of posts to show
+paginate_path: /page:num/
+timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+collections:
+  - projects
+
+include:
+  - _pages
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -44,3 +50,66 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+# Plugins (previously gems:)
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
+
+author:
+  name   : "Nicola Klemenc"
+  avatar : "/assets/images/klemenc.png"
+  bio    : "Software engineer"
+  links:
+    - label: "GitLab"
+      icon: "fab fa-fw fa-gitlab"
+      url: "https://gitlab.com/nicklem1"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/nicklem"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/nicola-klemenc-4bb550135/"
+
+footer:
+  links:
+    - label: "GitLab"
+      icon: "fab fa-fw fa-gitlab"
+      url: "https://gitlab.com/nicklem1"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/nicklem"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/nicola-klemenc-4bb550135/"
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  # _pages
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/

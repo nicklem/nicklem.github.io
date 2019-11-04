@@ -1,45 +1,19 @@
-<footer class="site-footer h-card">
-    <data class="u-url" href="{{ "/" | relative_url }}"></data>
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    {% if site.data.ui-text[site.locale].follow_label %}
+      <li><strong>{{ site.data.ui-text[site.locale].follow_label }}</strong></li>
+    {% endif %}
 
-    <div class="wrapper">
+    {% if site.footer.links %}
+      {% for link in site.footer.links %}
+        {% if link.label and link.url %}
+          <li><a href="{{ link.url }}" rel="nofollow noopener noreferrer"><i class="{{ link.icon | default: 'fas fa-link' }}" aria-hidden="true"></i> {{ link.label }}</a></li>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
 
-        <h2 class="footer-heading">{{ site.title | escape }}</h2>
+    <li><a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].feed_label | default: "Feed" }}</a></li>
+  </ul>
+</div>
 
-        <div class="footer-col-wrapper">
-            <div class="footer-col footer-col-1">
-                <p>{{- site.description | escape -}}</p>
-            </div>
-
-            <div class="footer-col footer-col-2">
-            </div>
-
-            <div class="footer-col footer-col-3">
-                <ul class="social-media-list">
-                    <a href="{{ site.github_url }}" target="_blank">
-                        <span>GitHub</span>
-                    </a> |
-                    <a href="{{ site.gitlab_url }}" target="_blank">
-                        <span>GitLab</span>
-                    </a> |
-                    <a href="{{ site.linkedin_url }}" target="_blank">
-                        <span>LinkedIn</span>
-                    </a>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        // Crap snippet to fix dataframe display.
-        Array.prototype.slice.call(
-            document.querySelectorAll('.dataframe')
-        ).map(function(el) {
-            console.log(el.parentNode.setAttribute(
-                'style',
-                'max-height: 500px; overflow: auto; margin-bottom: 30px'
-            ))
-        });
-    </script>
-
-</footer>
+<div class="page__footer-copyright">&copy; {{ site.time | date: '%Y' }} {{ site.author.name | default: site.title }}. {{ site.data.ui-text[site.locale].powered_by | default: "Powered by" }} <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
