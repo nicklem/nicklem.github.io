@@ -12,15 +12,14 @@ client:
   - "Experimenta Science Museum Heilbronn"
 agency:
   - naturalvision.de
-goal: "To deliver a touch-enabled audio player with scrolling text and intuitive controls."
+goal: "To integrate an LSTM algorithm with an intuitive interface."
 contribution: >-
-  I developed the app's frontend logic, 
-  a custom interface framework and a Flask-based CMS for basic CRUD operations.
+  I implemented a full-stack solution to interact with a pre-existing 
+  LSTM library using PyTorch and Flask, along with a fully custom 
+  WebGL-enabled front-end, based on PixiJS.
 project_images:
   - 
     url: portfolio/poetrybox.gif
     caption: "Exhibit interaction"
 ---
 An interactive museum exhibit to create one's own poem with the help of Artificial Intelligence.
-<!--more-->
-
