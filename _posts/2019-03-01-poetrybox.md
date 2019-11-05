@@ -6,6 +6,7 @@ categories:
   - Projects
 tags:
   - Python
+  - JavaScript
 # Custom Project meta
 layout: project
 client:
