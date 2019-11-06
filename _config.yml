@@ -107,6 +107,8 @@ defaults:
       layout: single
       author_profile: true
 
+g_analytics_id: 'UA-151669109-1'
+
 category_archive:
   type: liquid
   path: /categories/
