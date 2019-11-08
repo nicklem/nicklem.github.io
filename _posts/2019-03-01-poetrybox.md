@@ -12,7 +12,7 @@ layout: project
 client:
   - "Experimenta Science Museum Heilbronn"
 agency:
-  - naturalvision.de
+  - '<a href="http://naturalvision.de" target="_blank">Natural Vision</a>'
 goal: "To integrate an LSTM algorithm with an intuitive interface."
 contribution: >-
   I implemented a full-stack solution to interact with a pre-existing 

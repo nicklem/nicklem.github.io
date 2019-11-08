@@ -11,7 +11,7 @@ layout: project
 client:
   - "Greenpeace"
 agency:
-  - Latte Creative
+  - '<a href="https://www.lattecreative.com" target="_blank">Latte Creative</a>'
 goal: >-
   To customize Greenpeace's official websites for South-East Asia 
   (Hong-Kong, Taiwan, S. Korea), working with a pre-existing bespoke 
