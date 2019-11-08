@@ -255,7 +255,7 @@ print(chk, check_msg.format(False, check_straight(chk)))
     
 
 
-Looking good! Now we can apply this function to our score grid and see if there are any flushes.
+Looking good! Now we can apply this function to our score grid and see if there are any straights.
 
 
 ```python
