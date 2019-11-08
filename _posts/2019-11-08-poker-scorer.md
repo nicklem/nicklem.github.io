@@ -3,6 +3,8 @@ title: "Building a Poker scorer"
 slug: poker-scorer
 categories:
   - Blog
+tags:
+  - Python
 ---
 Let's build a Poker scorer!
 
@@ -263,7 +265,7 @@ print(np.apply_along_axis(check_flush, 1, score_grid_extended))
     [0 0 0 0 0]
 
 
-No luck! Let's try feeding in a manufactured straight flushto an Ace of hearts:
+No luck! Let's try feeding in a manufactured straight flush to an Ace of hearts:
 
 
 ```python

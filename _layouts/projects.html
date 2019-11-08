@@ -22,7 +22,7 @@ layout: archive
 {% assign postsByYear = projects | group_by_exp: 'post', 'post.date | date: "%Y"' %}
 {% for year in postsByYear %}
   <section id="{{ year.name }}" class="taxonomy__section">
-    <h2 class="archive__subtitle">Recent projects</h2>
+    <h2 class="archive__subtitle">Recent client work</h2>
     <div class="entries-{{ page.entries_layout | default: 'list' }}">
       {% for post in year.items %}
         {% include project-single.html type=page.entries_layout %}
