@@ -217,13 +217,13 @@ def extend_score_grid(score_grid):
 score_grid_extended = extend_score_grid(score_grid)
 ```
 
-We can now define a `check_flush` function, which we'll use to check if any of the rows contains five consecutive ones, and return:
+We can now define a `check_straight` function, which we'll use to check if any of the rows contains five consecutive ones, and return:
 - the index of the highest 1 if there's a flush (minus an offset, since we prepended the aces)
 - 0 otherwise.
 
 
 ```python
-def check_flush(arr, n=5, ace_prepend_offset=1):
+def check_straight(arr, n=5, ace_prepend_offset=1):
     chk = np.ones(n)
     for m in range(0, 1 + len(arr) - n):
         if (arr[m:m+n] == chk).all():
@@ -239,12 +239,12 @@ check_msg = '\nThis check should return {:2d}: {:2d}\n'
 
 chk = np.zeros(14)
 chk[0:5] = 1
-print(chk, check_msg.format(3, check_flush(chk)))
+print(chk, check_msg.format(3, check_straight(chk)))
 
 chk = np.zeros(14)
 chk[2:3] = 1
 chk[4:8] = 1
-print(chk, check_msg.format(False, check_flush(chk)))
+print(chk, check_msg.format(False, check_straight(chk)))
 ```
 
     [1. 1. 1. 1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.] 
@@ -259,7 +259,7 @@ Looking good! Now we can apply this function to our score grid and see if there 
 
 
 ```python
-print(np.apply_along_axis(check_flush, 1, score_grid_extended))
+print(np.apply_along_axis(check_straight, 1, score_grid_extended))
 ```
 
     [0 0 0 0 0]
@@ -272,7 +272,7 @@ No luck! Let's try feeding in a manufactured straight flush to an Ace of hearts:
 fake_straight_flush = np.zeros(14 * 5).reshape(5, 14)
 fake_straight_flush[0, -5:] = 1
 fake_straight_flush_index = np.apply_along_axis(
-    check_flush,
+    check_straight,
     1,
     fake_straight_flush
 )
@@ -312,7 +312,7 @@ The funcion below will:
 - take the indexes of the cards in the hand
 - sum 1 to each of them (to avoid scoring 0 when the card is a Two)
 - order the indexes by most present
-- roll the array if it's a straight to 5, to avoid counting the Ace as the highest card (we'll use `check_flush` to activate this option if needed)
+- roll the array if it's a straight to 5, to avoid counting the Ace as the highest card (we'll use `check_straight` to activate this option if needed)
 - format the indexes as strings to each take up two digits
 - concatenate them
 - pad on the right with 00 to get to ten digits total
@@ -420,7 +420,7 @@ def score_hand(hand=HAND, deck=DECK, suits=SUITS, ranks=RANKS, verbose=False):
     
     score_grid_extended = extend_score_grid(score_grid)
     flush_indexes       = np.apply_along_axis(
-        check_flush, 1, score_grid_extended)
+        check_straight, 1, score_grid_extended)
 
     same_rank_counts             = score_grid.sum(axis=0)
     same_suit_counts             = score_grid.sum(axis=1)
