@@ -17,7 +17,7 @@ goal: >-
   (Hong-Kong, Taiwan, S. Korea), working with a pre-existing bespoke 
   deployment infrastructure (Planet4).
 contribution: >-
-  I implemented the backend logic for a custom WordPress theme and plugin.
+  I implemented the backend logic for the websites' themes and plugins.
 links:
   -
     url: https://github.com/greenpeace/planet4-child-theme-hongkong/graphs/contributors
