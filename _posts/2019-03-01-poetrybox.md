@@ -10,7 +10,7 @@ tags:
 # Custom Project meta
 layout: project
 client:
-  - "Experimenta Science Museum Heilbronn"
+  - '<a href="https://www.experimenta.science/" target="_blank">Experimenta Heilbronn</a>'
 agency:
   - '<a href="http://naturalvision.de" target="_blank">Natural Vision</a>'
 goal: "To integrate an LSTM algorithm with an intuitive interface."
@@ -19,6 +19,9 @@ contribution: >-
   LSTM library using PyTorch and Flask, along with a fully custom 
   WebGL-enabled front-end, based on PixiJS.
 project_images:
+  - 
+    url: portfolio/poetrybox_0.jpg
+    caption: "Exhibit installation"
   - 
     url: portfolio/poetrybox.gif
     caption: "Exhibit interaction"
