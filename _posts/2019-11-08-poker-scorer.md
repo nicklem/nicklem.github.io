@@ -19,7 +19,7 @@ from operator import itemgetter as get
 from functools import partial
 ```
 
-A Poker deck contains 52 cards, 4 suits of 13 ranks each. Let's define these.
+A poker deck contains 52 cards, 4 suits of 13 ranks each. Let's define these.
 
 
 ```python
