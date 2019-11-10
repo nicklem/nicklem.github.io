@@ -345,12 +345,12 @@ Finally, we'll define two scoring dictionaries. We'll use these to pick the scor
 
 ```python
 rank_scores = dict({
-    2: lambda rank_count_2: (
+    2: lambda rank_count_1: (
         SCORE_TWO_PAIR
         if rank_count_2 == 2
         else SCORE_PAIR
     ),
-    3: lambda rank_count_2: (
+    3: lambda rank_count_1: (
         SCORE_FULL_HOUSE
         if rank_count_2 == 2
         else SCORE_THREE
@@ -521,12 +521,12 @@ def score_hand(hand):
     is_flush = len(suit_counts) == 1
     
     rank_scores = dict({
-        2: lambda rank_count_2: (
+        2: lambda rank_count_1: (
             SCORE_TWO_PAIR
             if rank_count_2 == 2
             else SCORE_PAIR
         ),
-        3: lambda rank_count_2: (
+        3: lambda rank_count_1: (
             SCORE_FULL_HOUSE
             if rank_count_2 == 2
             else SCORE_THREE
