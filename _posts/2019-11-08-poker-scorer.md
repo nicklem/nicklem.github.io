@@ -632,7 +632,8 @@ def test_high_hands(min_high_score, attempts=3, message=None):
 
 
 ```python
-average_attempts_full = test_high_hands(SCORE_FULL_HOUSE, message='Full House or better')
+average_attempts_full = test_high_hands(
+    SCORE_FULL_HOUSE, message='Full House or better')
 ```
 
     Full House or better 
@@ -659,7 +660,8 @@ average_attempts_full = test_high_hands(SCORE_FULL_HOUSE, message='Full House or
 
 
 ```python
-average_attempts_poker = test_high_hands(SCORE_POKER, message='Poker or better')
+average_attempts_poker = test_high_hands(
+    SCORE_POKER, message='Poker or better')
 ```
 
     Poker or better 
@@ -686,7 +688,8 @@ average_attempts_poker = test_high_hands(SCORE_POKER, message='Poker or better')
 
 
 ```python
-average_attempts_flush = test_high_hands(SCORE_STRAIGHT_FLUSH, message='Straight flush')
+average_attempts_flush = test_high_hands(
+    SCORE_STRAIGHT_FLUSH, message='Straight flush')
 ```
 
     Straight flush 
