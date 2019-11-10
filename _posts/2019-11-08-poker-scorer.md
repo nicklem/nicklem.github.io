@@ -1,6 +1,6 @@
 ---
-title: "Building a Poker scorer"
-slug: poker-scorer
+title: "How to build a poker scorer"
+slug: how-to-build-a-poker-scorer
 categories:
   - Blog
 tags:
