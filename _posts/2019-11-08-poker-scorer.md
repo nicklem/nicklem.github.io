@@ -362,7 +362,7 @@ straight_flush_scores = dict({
     False: lambda is_flush: (
         SCORE_FLUSH
         if is_flush
-        else 0
+        else SCORE_NO_PAIR
     ),
     True: lambda is_flush: (
         SCORE_STRAIGHT_FLUSH
@@ -538,7 +538,7 @@ def score_hand(hand):
         False: lambda is_flush: (
             SCORE_FLUSH
             if is_flush
-            else 0
+            else SCORE_NO_PAIR
         ),
         True: lambda is_flush: (
             SCORE_STRAIGHT_FLUSH
