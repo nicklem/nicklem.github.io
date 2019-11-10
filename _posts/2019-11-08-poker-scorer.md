@@ -19,7 +19,7 @@ from operator import itemgetter as get
 from functools import partial
 ```
 
-A poker deck contains 52 cards, 4 suits of 13 ranks each. Let's define these.
+A Poker deck contains 52 cards, 4 suits of 13 ranks each. Let's define these.
 
 
 ```python
@@ -61,23 +61,17 @@ print('Hand:          {}'.format(str_cards(hand)))
     Deck indexes:  ((0, 0), (0, 1), (0, 2), (0, 3), (0, 4)), ...
     Deck:          ♥ 2, ♥ 3, ♥ 4, ♥ 5, ♥ 6, ...
     
-    Hand indexes:  [(2, 3), (0, 9), (2, 9), (3, 4), (2, 12)]
-    Hand:          ♣ 5, ♥ J, ♣ J, ♠ 6, ♣ A
+    Hand indexes:  [(2, 4), (1, 12), (3, 12), (2, 3), (1, 2)]
+    Hand:          ♣ 6, ♦ A, ♠ A, ♣ 5, ♦ 4
 
 
-We can now use a `Counter` to check how many cards of each rank and suit are present in the hand. We'll use these later to score the hand.
+We can now use a `Counter` to check how many cards of each rank are present in the hand. We'll use these later to score the hand.
 
 
 ```python
-SUIT, RANK = 0, 1
+RANK_IDX = 1
 
-suit_counts = Counter(map(get(SUIT), hand))
-rank_counts = Counter(map(get(RANK), hand))
-
-print('Suit counts:  {}'.format(
-    ', '.join(map(
-        partial(str_count, SUITS),
-        suit_counts.items()))))
+rank_counts = Counter(map(get(RANK_IDX), hand))
 
 print('Rank counts:  {}'.format(
     ', '.join(map(
@@ -85,34 +79,20 @@ print('Rank counts:  {}'.format(
         rank_counts.items()))))
 ```
 
-    Suit counts:  ♣: 3, ♥: 1, ♠: 1
-    Rank counts:  5: 1, J: 2, 6: 1, A: 1
+    Rank counts:  6: 1, A: 2, 5: 1, 4: 1
 
 
-Cool! Let's sort these counts.
-- We'll sort the suit counts by most present in our hand.
-- We'll sort the rank counts by most present, and then by rank value. This will help us calculate a base score for the hand. You'll see how later.
+Cool! Let's sort these counts by most present, and then by rank value. This will help us calculate a base score for the hand. You'll see how later.
 
 
 ```python
-VALUE, COUNT = 0, 1
-
-sorted_suit_counts = sorted(
-    suit_counts.items(),
-    key=get(COUNT),
-    reverse=True
-)
+VALUE_IDX, COUNT_IDX = 0, 1
 
 sorted_rank_counts = sorted(
     rank_counts.items(),
-    key=get(COUNT, VALUE),
+    key=get(COUNT_IDX, VALUE_IDX),
     reverse=True
 )
-
-print('Sorted suit counts:  {}'.format(
-    ', '.join(map(
-        partial(str_count, SUITS),
-        sorted_suit_counts))))
 
 print('Sorted rank counts:  {}'.format(
     ', '.join(map(
@@ -120,8 +100,7 @@ print('Sorted rank counts:  {}'.format(
         sorted_rank_counts))))
 ```
 
-    Sorted suit counts:  ♣: 3, ♥: 1, ♠: 1
-    Sorted rank counts:  J: 2, A: 1, 6: 1, 5: 1
+    Sorted rank counts:  A: 2, 6: 1, 5: 1, 4: 1
 
 
 Before moving on, we'll need to consider a special case. Let's see what happens if we try to sort a low straight, an Ace to Five.
@@ -132,11 +111,11 @@ In this case, the Ace should be the lowest value card, so our sorting should out
 ```python
 low_straight = [(0, 12), (0, 0), (0, 1), (0, 2), (0, 3)]
 
-low_straight_counts = Counter(map(get(RANK), low_straight))
+low_straight_counts = Counter(map(get(RANK_IDX), low_straight))
 
 sorted_low_straight_counts = sorted(
     low_straight_counts.items(),
-    key=get(COUNT, VALUE),
+    key=get(COUNT_IDX, VALUE_IDX),
     reverse=True
 )
 
@@ -162,7 +141,7 @@ Let's test this on our `sorted_low_straight_counts` defined above.
 
 
 ```python
-if list(map(get(VALUE), sorted_low_straight_counts)) == [12, 3, 2, 1, 0]:
+if list(map(get(VALUE_IDX), sorted_low_straight_counts)) == [12, 3, 2, 1, 0]:
     sorted_low_straight_counts = (
         sorted_low_straight_counts[1:] +
         [(-1, sorted_low_straight_counts[0][1])]
@@ -181,30 +160,25 @@ Cool, it works as expected. Let's rewrite the snippet above using our actual `so
 
 
 ```python
-if list(map(get(VALUE), sorted_rank_counts)) == [12, 3, 2, 1, 0]:
+if list(map(get(VALUE_IDX), sorted_rank_counts)) == [12, 3, 2, 1, 0]:
     sorted_rank_counts = (
         sorted_rank_counts[1:] +
         [(-1, sorted_rank_counts[0][1])]
     )
 ```
 
-Having fixed this detail, we can now look for the count of the most present suit (this value will be 5 if we have a flush) and the two most present rank counts (to check for pair, two pair, and so on).
+Having fixed this detail, we can now look for the count of the two most present rank counts. This way we'll be able to check for pair, two pair, and so on.
 
 
 ```python
-suit_count_1               = sorted_suit_counts[0][1]
 rank_count_1, rank_count_2 = map(
-    get(1),
+    get(COUNT_IDX),
     sorted_rank_counts[:2])
-
-print('The most common suit appears {} times in the hand'.format(
-    suit_count_1))
 
 print('The most common ranks appear {} and {} times in the hand'.format(
     rank_count_1, rank_count_2))
 ```
 
-    The most common suit appears 3 times in the hand
     The most common ranks appear 2 and 1 times in the hand
 
 
@@ -233,9 +207,9 @@ This way we'll keep the information on which cards are present in our hand, plus
 
 
 ```python
-def base_score_from_ranks(r, i=VALUE):
+def base_score_from_ranks(r, idx=VALUE_IDX):
     r = map(
-        lambda c: str(2 + c[i]).zfill(2),
+        lambda c: str(2 + c[idx]).zfill(2),
         r
     )
     r = ''.join(r).ljust(10, '0')
@@ -248,11 +222,11 @@ Let's test this out with our example above, a two pair of Sevens and Sixes, kick
 ```python
 two_pair = [(0, 5), (1, 5), (0, 4), (1, 4), (0, 12)]
 
-two_pair_counts = Counter(map(get(RANK), two_pair))
+two_pair_counts = Counter(map(get(RANK_IDX), two_pair))
 
 sorted_two_pair_counts = sorted(
     two_pair_counts.items(),
-    key=get(COUNT, VALUE),
+    key=get(COUNT_IDX, VALUE_IDX),
     reverse=True
 )
 
@@ -280,7 +254,7 @@ base_score = base_score_from_ranks(sorted_rank_counts)
 print('Base score from rank counts:', base_score)
 ```
 
-    Base score from rank counts: 1114060500
+    Base score from rank counts: 1406050400
 
 
 We'll also need its inverse function, to retrieve the set of card ranks in the hand. We'll use this to pretty print our hand's score.
@@ -319,8 +293,8 @@ print('Card ranks in hand:', ', '.join(
     rank_set))
 ```
 
-    Hand: ♣ 5, ♥ J, ♣ J, ♠ 6, ♣ A
-    Card ranks in hand: J, A, 6, 5
+    Hand: ♣ 6, ♦ A, ♠ A, ♣ 5, ♦ 4
+    Card ranks in hand: A, 6, 5, 4
 
 
 We're now ready to check if our hand is a straight or a flush. A straight will have 5 different ranks, all of them differing by 1. If we sum these differences, we'll get a total of 4.
@@ -342,11 +316,13 @@ is_straight = (
 )
 ```
 
-Checking for a flush will be much easier. We'll just need to verify whether our `suit_counts` has only one element, i.e. all cards are of the same suit.
+Checking for a flush will be much easier. We'll just need to count how many different suits there are in our hand. If we find only one, then all the cards are of the same suit.
 
 
 ```python
-is_flush = len(suit_counts) == 1
+SUIT_IDX = 0
+
+is_flush = len(Counter(map(get(SUIT_IDX), hand))) == 1
 ```
 
 We can now define some point scores. You'll notice that the lowest score, SCORE_PAIR, is equal to `1e10`. This will allow us to sum the base score and the point score, while still being able to separate them later, since the base score will occupy the lowest 10 digits, while the point score will always occupy the 11th digit.
@@ -405,7 +381,7 @@ We'll then choose the highest among the two. This will be our point score.
 
 ```python
 rank_score = rank_scores.get(
-    rank_count_1, lambda _: 0)(rank_count_2)
+    rank_count_1, lambda _: SCORE_NO_PAIR)(rank_count_2)
 
 consecutive_score = straight_flush_scores.get(
     is_straight)(is_flush)
@@ -455,12 +431,11 @@ Let's test it out.
 
 ```python
 print('Your hand: {}'.format(str_cards(hand)))
-print('You have:  {}'.format(pretty_print_score(
-    base_score + max(rank_score, consecutive_score))))
+print('You have:  {}'.format(pretty_print_score(base_score + max(rank_score, consecutive_score))))
 ```
 
-    Your hand: ♣ 5, ♥ J, ♣ J, ♠ 6, ♣ A
-    You have:  Pair J, kicker A
+    Your hand: ♣ 6, ♦ A, ♠ A, ♣ 5, ♦ 4
+    You have:  Pair A, kicker 6
 
 
 Seems to work. Cool!
@@ -478,8 +453,8 @@ RANKS = (
 SUITS = ('♥', '♦', '♣', '♠')
 
 # Indexes
-SUIT, RANK   = 0, 1
-VALUE, COUNT = 0, 1
+SUIT_IDX,  RANK_IDX  = 0, 1
+VALUE_IDX, COUNT_IDX = 0, 1
 
 SCORE_STRAIGHT_FLUSH = 8e10
 SCORE_POKER          = 7e10
@@ -510,31 +485,27 @@ We can now define a `score_hand` function to abstract all the logic discussed so
 ```python
 def score_hand(hand):
     
-    suit_counts = Counter(map(get(SUIT), hand))
-    rank_counts = Counter(map(get(RANK), hand))
+    suit_counts = Counter(map(get(SUIT_IDX), hand))
+    rank_counts = Counter(map(get(RANK_IDX), hand))
     
-    sorted_suit_counts = sorted(
-        suit_counts.items(),
-        key=get(COUNT),
-        reverse=True
-    )
-
     sorted_rank_counts = sorted(
         rank_counts.items(),
-        key=get(COUNT, VALUE),
+        key=get(COUNT_IDX, VALUE_IDX),
         reverse=True
     )
     
     # Special case, A 5 4 3 2 to 5 4 3 2 A
-    if list(map(get(VALUE), sorted_rank_counts)) == [12, 3, 2, 1, 0]:
+    if list(map(
+            get(VALUE_IDX),
+            sorted_rank_counts)
+    ) == [12, 3, 2, 1, 0]:
         sorted_rank_counts = (
             sorted_rank_counts[1:] +
             [(-1, sorted_rank_counts[0][1])]
         )
     
-    suit_count_1 = sorted_suit_counts[0][1]
     rank_count_1, rank_count_2 = map(
-        get(1),
+        get(COUNT_IDX),
         sorted_rank_counts[:2])
     
     ranks_no_counts = list(map(get(0), sorted_rank_counts))
@@ -577,7 +548,7 @@ def score_hand(hand):
     })
     
     rank_score = rank_scores.get(
-        rank_count_1, lambda _: 0)(rank_count_2)
+        rank_count_1, lambda _: SCORE_NO_PAIR)(rank_count_2)
     
     consecutive_score = straight_flush_scores.get(
         is_straight)(is_flush)
@@ -621,17 +592,17 @@ for _ in range(3):
     test_scorer(hand[:5], hand[5:])
 ```
 
-    Hand 1, Pair T, kicker 9          ♥ T, ♠ 9, ♦ 6, ♦ 4, ♠ T
-    Hand 2, High K, second Q          ♣ Q, ♣ J, ♦ 9, ♣ K, ♥ 2
-    Winner: Hand 1
-    
-    Hand 1, High K, second Q          ♦ 8, ♦ Q, ♥ K, ♥ 7, ♣ 4
-    Hand 2, High T, second 5          ♠ 4, ♠ 3, ♦ 2, ♥ T, ♥ 5
-    Winner: Hand 1
-    
-    Hand 1, High A, second 8          ♠ A, ♣ 5, ♦ 4, ♠ 2, ♠ 8
-    Hand 2, Two Pair 5 2, kicker 7    ♦ 7, ♦ 2, ♥ 5, ♣ 2, ♠ 5
+    Hand 1, High Q, second J          ♦ J, ♥ 6, ♣ Q, ♠ 9, ♣ 7
+    Hand 2, High K, second J          ♠ 6, ♠ J, ♥ K, ♦ 9, ♥ 8
     Winner: Hand 2
+    
+    Hand 1, Two Pair K 2, kicker 5    ♣ 2, ♣ K, ♥ 2, ♦ K, ♥ 5
+    Hand 2, High K, second 9          ♦ 8, ♠ 9, ♠ 3, ♥ K, ♦ 2
+    Winner: Hand 1
+    
+    Hand 1, Pair Q, kicker J          ♥ T, ♣ J, ♦ 4, ♥ Q, ♦ Q
+    Hand 2, High A, second J          ♠ A, ♣ 4, ♦ 8, ♠ 3, ♥ J
+    Winner: Hand 1
     
 
 
@@ -661,84 +632,81 @@ def test_high_hands(min_high_score, attempts=3, message=None):
 
 
 ```python
-average_attempts_full = test_high_hands(
-    SCORE_FULL_HOUSE, message='Full House or better')
+average_attempts_full = test_high_hands(SCORE_FULL_HOUSE, message='Full House or better')
 ```
 
     Full House or better 
     
-    After 1102 attempts:
+    After 81 attempts:
     
-    Hand 1, Full, 2 3                 ♠ 3, ♦ 3, ♥ 2, ♦ 2, ♣ 2
-    Hand 2, High K, second J          ♥ 3, ♥ J, ♠ 6, ♥ K, ♣ T
+    Hand 1, Full, 6 A                 ♣ 6, ♥ A, ♦ 6, ♠ A, ♠ 6
+    Hand 2, Pair 8, kicker J          ♣ 8, ♣ 3, ♦ 8, ♠ 9, ♦ J
     Winner: Hand 1
     
-    After 608 attempts:
+    After 705 attempts:
     
-    Hand 1, Full, K Q                 ♥ K, ♣ Q, ♦ K, ♣ K, ♠ Q
-    Hand 2, High J, second T          ♦ 6, ♥ 3, ♠ J, ♥ T, ♦ 2
+    Hand 1, Full, T A                 ♥ T, ♣ A, ♥ A, ♣ T, ♦ T
+    Hand 2, High Q, second 6          ♣ 4, ♦ 5, ♥ Q, ♣ 6, ♠ 2
     Winner: Hand 1
     
-    After 73 attempts:
+    After 409 attempts:
     
-    Hand 1, Full, K 5                 ♥ K, ♠ 5, ♠ K, ♦ K, ♣ 5
-    Hand 2, Pair 5, kicker Q          ♦ 5, ♦ Q, ♥ 6, ♥ 5, ♣ 3
+    Hand 1, Full, T 4                 ♣ T, ♦ T, ♠ 4, ♣ 4, ♥ T
+    Hand 2, Pair A, kicker 9          ♣ A, ♦ 6, ♦ A, ♦ 2, ♦ 9
     Winner: Hand 1
     
 
 
 
 ```python
-average_attempts_poker = test_high_hands(
-    SCORE_POKER, message='Poker or better')
+average_attempts_poker = test_high_hands(SCORE_POKER, message='Poker or better')
 ```
 
     Poker or better 
     
-    After 373 attempts:
+    After 2943 attempts:
     
-    Hand 1, Poker 9, kicker A         ♣ 9, ♠ 9, ♥ A, ♦ 9, ♥ 9
-    Hand 2, Two Pair J 8, kicker 5    ♣ 5, ♥ J, ♦ 8, ♣ J, ♠ 8
+    Hand 1, Poker 5, kicker 6         ♣ 5, ♠ 5, ♥ 5, ♦ 5, ♥ 6
+    Hand 2, High K, second J          ♣ 2, ♠ J, ♠ K, ♦ 3, ♣ 8
     Winner: Hand 1
     
-    After 4197 attempts:
+    After 1482 attempts:
     
-    Hand 1, Poker Q, kicker T         ♣ T, ♣ Q, ♥ Q, ♠ Q, ♦ Q
-    Hand 2, High 8, second 5          ♠ 5, ♦ 2, ♣ 3, ♦ 4, ♦ 8
+    Hand 1, Poker 2, kicker 4         ♥ 4, ♦ 2, ♣ 2, ♠ 2, ♥ 2
+    Hand 2, High Q, second J          ♥ J, ♦ Q, ♣ 9, ♠ 4, ♦ 6
     Winner: Hand 1
     
-    After 2051 attempts:
+    After 1264 attempts:
     
-    Hand 1, Poker 3, kicker 4         ♠ 3, ♥ 3, ♥ 4, ♣ 3, ♦ 3
-    Hand 2, High 9, second 8          ♥ 7, ♣ 9, ♥ 8, ♦ 4, ♠ 6
+    Hand 1, Poker J, kicker T         ♠ J, ♣ T, ♦ J, ♣ J, ♥ J
+    Hand 2, High Q, second T          ♠ 3, ♠ Q, ♣ 8, ♥ 5, ♥ T
     Winner: Hand 1
     
 
 
 
 ```python
-average_attempts_flush = test_high_hands(
-    SCORE_STRAIGHT_FLUSH, message='Straight flush')
+average_attempts_flush = test_high_hands(SCORE_STRAIGHT_FLUSH, message='Straight flush')
 ```
 
     Straight flush 
     
-    After 159106 attempts:
+    After 95327 attempts:
     
-    Hand 1, Straight flush A          ♣ Q, ♣ T, ♣ A, ♣ K, ♣ J
-    Hand 2, Two Pair T 8, kicker 5    ♣ 5, ♥ 8, ♦ 8, ♠ T, ♦ T
+    Hand 1, Straight flush 9          ♦ 5, ♦ 6, ♦ 7, ♦ 9, ♦ 8
+    Hand 2, Pair K, kicker J          ♣ K, ♥ K, ♣ 9, ♠ T, ♦ J
     Winner: Hand 1
     
-    After 45005 attempts:
+    After 66402 attempts:
     
-    Hand 1, Straight flush 7          ♠ 6, ♠ 5, ♠ 7, ♠ 3, ♠ 4
-    Hand 2, High A, second T          ♣ 2, ♥ A, ♣ 3, ♦ T, ♣ 9
+    Hand 1, Straight flush T          ♣ 8, ♣ 9, ♣ T, ♣ 7, ♣ 6
+    Hand 2, High J, second T          ♠ 7, ♦ J, ♥ 5, ♠ T, ♦ 2
     Winner: Hand 1
     
-    After 47234 attempts:
+    After 139347 attempts:
     
-    Hand 1, Straight flush Q          ♥ J, ♥ T, ♥ 9, ♥ 8, ♥ Q
-    Hand 2, Pair 4, kicker K          ♠ 4, ♦ 6, ♥ K, ♥ 4, ♠ T
+    Hand 1, Straight flush 5          ♥ 4, ♥ 3, ♥ 5, ♥ 2, ♥ A
+    Hand 2, Pair 5, kicker K          ♠ 5, ♣ 4, ♦ 9, ♠ K, ♣ 5
     Winner: Hand 1
     
 
@@ -752,10 +720,9 @@ print('Poker or better:      {:.2f}%'.format(100 / average_attempts_poker))
 print('Straight flush:       {:.3f}%'.format(100 / average_attempts_flush))
 ```
 
-    Full House or better: 0.2%
+    Full House or better: 0.3%
     Poker or better:      0.05%
     Straight flush:       0.001%
-
 
 Thanks for checking out this tutorial! I hope it helped you gain some insight into Python.
 
