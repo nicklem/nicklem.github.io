@@ -54,7 +54,7 @@ html {
 }
 
 .anima {
-    animation: ease-in-out 2s anima-cifra;
+    animation: ease-in-out 1s anima-cifra;
 }
 
 @keyframes anima-cifra {

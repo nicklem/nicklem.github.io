@@ -25,7 +25,7 @@ function anima(idx, n, tipo) {
     setTimeout(function() {
         n1.innerText = n;
         c.classList.remove('anima');
-    }, 1980);
+    }, 980);
 }
 
 String.prototype.lpad = function(padString, length) {
@@ -76,13 +76,13 @@ function step() {
             }
         }
 
-        let bin_new = dec2bin(n);
-        for(let i = 0, l = bin.length; i < l; i++) {
-            if(bin_new[i] !== bin[i]) {
-                anima(i, bin_new[i], 'b');
-                bin[i] = bin_new[i];
-            }
-        }
+        // let bin_new = dec2bin(n);
+        // for(let i = 0, l = bin.length; i < l; i++) {
+        //     if(bin_new[i] !== bin[i]) {
+        //         anima(i, bin_new[i], 'b');
+        //         bin[i] = bin_new[i];
+        //     }
+        // }
 
         // let hex_new = dec2hex(n);
         // for(let i = 0, l = bin.length; i < l; i++) {
@@ -91,15 +91,15 @@ function step() {
         //         hex[i] = hex_new[i];
         //     }
         // }
-        //
+
         n++;
     }
 }
 
 crea_contenitori('contatore-decimale', 'd');
-crea_contenitori('contatore-binario', 'b');
+// crea_contenitori('contatore-binario', 'b');
 // crea_contenitori('contatore-esadecimale', 'h');
 
 step();
 
-setInterval(step, 2000);
+setInterval(step, 1000);
