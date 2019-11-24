@@ -1,0 +1,76 @@
+html {
+    font-family: monospace;
+}
+
+#contatore-decimale,
+#contatore-binario,
+#contatore-esadecimale {
+    width: 100%;
+    margin-top: 100px;
+    text-align: center;
+    overflow: hidden;
+    font-size: 80pt;
+    color: #2f3644;
+    height: 124px;
+}
+
+#buttons {
+    position: absolute;
+    width: 99vw;
+    bottom: 25pt;
+    text-align: center;
+}
+
+#buttons button {
+    width: 20%;
+    font-size: 40pt;
+    padding: 15pt;
+    margin: 0 20pt;
+    font-family: monospace;
+    background-color: coral;
+    border: none;
+    color: cornsilk;
+}
+
+#pause.pause {
+    background-color: red;
+}
+
+.cifra {
+    display: inline-block;
+    position: relative;
+    background-image: linear-gradient(to bottom, #9cc2cb, #dcfce4, #dcfce4, #9cc2cb);
+    border-radius: 3pt;
+    width: 85px;
+    height: 124px;
+    box-shadow: 0 0 10px black inset;
+}
+
+.cifra-inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -100%;
+}
+
+.anima {
+    animation: ease-in-out 1s anima-cifra;
+}
+
+@keyframes anima-cifra {
+
+    0% {
+        top: -100%;
+        opacity: 1;
+    }
+
+    5% {
+        top: -100%;
+        opacity: 1;
+    }
+
+    100% {
+        top: 0;
+    }
+
+}
