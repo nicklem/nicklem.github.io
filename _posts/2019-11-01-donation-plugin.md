@@ -1,5 +1,5 @@
 ---
-title: "WordPress - Donation plugin"
+title: "Latte Creative - WP Donation plugin"
 slug: wp-donation-plugin
 excerpt_separator: "<!--more-->"
 categories:
@@ -19,4 +19,4 @@ links:
     url: https://donate.slowfood.com/campagna/30-years-of-the-slow-food-manifesto/
     name: Sample installation
 ---
-
+WordPress plugin.
