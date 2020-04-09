@@ -82,11 +82,12 @@
 </div>
                                             <div class="px-4">
                                                 <h4>Column title</h4>
-                                                <p class="mb-0">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec
-                                        id elit non mi
-                                        porta
-                                        gravida
-                                        at eget metus.</p>
+                                                <p class="mb-0">Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                                            Donec
+                                            id elit non mi
+                                            porta
+                                            gravida
+                                            at eget metus.</p>
                                             </div>
                                         </div>
                                         <div class="swiper-slide">
@@ -95,11 +96,12 @@
 </div>
                                             <div class="px-4">
                                                 <h4>Column title</h4>
-                                                <p class="mb-0">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec
-                                        id elit non mi
-                                        porta
-                                        gravida
-                                        at eget metus.</p>
+                                                <p class="mb-0">Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                                            Donec
+                                            id elit non mi
+                                            porta
+                                            gravida
+                                            at eget metus.</p>
                                             </div>
                                         </div>
                                         <div class="swiper-slide">
@@ -108,11 +110,12 @@
 </div>
                                             <div class="px-4">
                                                 <h4>Column title</h4>
-                                                <p class="mb-0">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec
-                                        id elit non mi
-                                        porta
-                                        gravida
-                                        at eget metus.</p>
+                                                <p class="mb-0">Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                                            Donec
+                                            id elit non mi
+                                            porta
+                                            gravida
+                                            at eget metus.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -473,7 +476,9 @@
                                     <h3>Would you like to know more?</h3>
                                     <p>Some quick example text to build on the card title and make up the bulk
                                 of the card's content.</p>
-                                    <a href="" class="btn btn-primary rounded-pill text-uppercase">Ask the doctor</a>
+                                    <button type="button" class="btn btn-primary rounded-pill text-uppercase" data-toggle="modal" data-target="#contactModal">
+                                        Ask the doctor
+</button>
                                 </div>
                             </div>
                         </section>
@@ -690,6 +695,77 @@
                         </div>
                     </div>
                 </footer>
+                <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content rounded">
+                            <div class="modal-header">
+                                <h3 id="contactModalLabel" class="modal-title">Ask for information</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-muted">Send us a messagge to know more about EPROPA and how the project may support your therapy or your patients.</p>
+                                <hr/>
+                                <form role="form"> 
+                                    <div class="row">
+                                        <div class="col-md-6 form-group"> 
+                                            <label for="formInput112">Name</label>                                             
+
+                                            <input type="text" class="form-control" id="formInput112" placeholder="Enter name"> 
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="formInput112">Surname</label>                                             
+                                            <input type="text" class="form-control" id="formInput112" placeholder="Enter name">
+                                        </div>
+                                        <div class="col-md-6 form-group"> 
+                                            <label for="exampleInputEmail1">Email address</label>                                             
+
+                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"> 
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="formInput112">Gender</label>
+                                            <select class="form-control"> 
+                                                <option>1</option>                                                 
+
+                                                <option>2</option>                                                 
+
+                                                <option>3</option>                                                 
+                                            </select>                                             
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="formInput112">Age</label>
+                                            <input type="text" class="form-control" placeholder="Placeholder text"> 
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="formInput112">I am a</label>
+                                            <select class="form-control"> 
+                                                <option>1</option>                                                 
+                                                <option>2</option>                                                 
+                                                <option>3</option>                                                 
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="formInput112">Country</label>
+                                            <input type="text" class="form-control" id="formInput112" placeholder="Enter name">
+                                        </div>
+                                        <div class="col-12 form-group">
+                                            <label for="formInput112">Message</label>
+                                            <textarea class="form-control" rows="3"></textarea>
+                                        </div>
+                                    </div>                                                                                                               
+
+                                    <div class="form-check"> 
+                                        <input class="form-check-input" type="checkbox" value="" id="exampleInputCheck1"> 
+                                        <label class="form-check-label" for="exampleInputCheck1">                        Check me out                    </label>                                         
+                                    </div>
+                                    <small class="text-muted">We would like to remind you that we provide information services via this platform. The output from these does not constitute medical advice, diagnosis or treatment. You should always talk to a qualified medical professional about any questions you may have about a medical condition. If you think you have a medical emergency, you should call your doctor or the emergency services immediately. Any decisions you make affecting your health should always be made in consultation with a doctor, and not on the basis of our services.</small> 
+                                    <button type="submit" class="btn btn-primary">Submit</button>                                     
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
         <!-- Bootstrap core JavaScript
