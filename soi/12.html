@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/snippets.js"></script>
   </head>
   <body></body>
   <header>
@@ -13,8 +15,7 @@
       <div class="container width-xl">
         <div class="columns">
           <div class="column flex-left-centered soi-nav-logo"><a class="flex-left" href="/soi/">
-              <div class="soi-logo-container"></div>
-              <!--img(src='../img/logo_placeholder.png' alt='logo')--></a></div>
+              <div class="soi-logo-container"></div></a></div>
           <div class="column flex-left-centered soi-nav-title">
             <h4>PRIMO CONGRESSO VIRTUALE</h4>
           </div>
@@ -75,11 +76,82 @@
       </div>
     </div>
   </div>
-  <div class="soi-menu-footer"><a href="#">
+  <div class="soi-menu-footer">
+    <div class="menu-footer-bg"></div><a href="#">
       <div class="soi-menu-footer-icon"><span class="soi-menu-footer-icon-icon"></span><span class="soi-menu-footer-icon-caption">Home</span></div></a><a href="#">
       <div class="soi-menu-footer-icon"><span class="soi-menu-footer-icon-icon"></span><span class="soi-menu-footer-icon-caption">Messaggi</span></div></a><a href="#">
       <div class="soi-menu-footer-icon"><span class="soi-menu-footer-icon-icon"></span><span class="soi-menu-footer-icon-caption">Expo</span></div></a><a href="#">
-      <div class="soi-menu-footer-icon"><span class="soi-menu-footer-icon-icon"></span><span class="soi-menu-footer-icon-caption">Programma</span></div></a><a href="#">
+      <div class="soi-menu-footer-icon"><span class="soi-menu-footer-icon-icon"></span><span class="soi-menu-footer-icon-caption">Programma</span></div></a><a class="js-ask-call" href="#">
       <div class="soi-menu-footer-icon"><span class="soi-menu-footer-icon-icon"></span><span class="soi-menu-footer-icon-caption">Help desk</span></div></a><a href="#">
-      <div class="soi-menu-footer-icon"><span class="soi-menu-footer-icon-icon"></span></div></a></div>
+      <div class="soi-menu-footer-icon"><span class="soi-menu-footer-icon-icon"></span></div></a>
+  </div>
+  <div class="modal modal-sm js-modal-sm"><a class="modal-overlay" href="#" aria-label="Close"></a>
+    <div class="modal-container">
+      <div class="modal-header"><a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
+        <div class="modal-title h5">Header</div>
+      </div>
+      <div class="modal-body">
+        <div class="content">Content</div>
+      </div>
+      <div class="modal-footer">Footer</div>
+    </div>
+  </div>
+  <div class="modal js-modal-md"><a class="modal-overlay" href="#" aria-label="Close"></a>
+    <div class="modal-container">
+      <div class="modal-header"><a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
+        <div class="modal-title h5">Header</div>
+      </div>
+      <div class="modal-body">
+        <div class="content">Content</div>
+      </div>
+      <div class="modal-footer">Footer</div>
+    </div>
+  </div>
+  <div class="modal modal-lg js-modal-lg"><a class="modal-overlay" href="#" aria-label="Close"></a>
+    <div class="modal-container">
+      <div class="modal-header"><a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
+        <div class="modal-title h5">Header</div>
+      </div>
+      <div class="modal-body">
+        <div class="content">Content</div>
+      </div>
+      <div class="modal-footer">Footer</div>
+    </div>
+  </div>
+  <div class="modal modal-overlay js-modal-overlay"><a class="modal-overlay" href="#" aria-label="Close"></a>
+    <div class="modal-container">
+      <div class="modal-header"><a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
+        <div class="modal-title h2">Overlay modal</div>
+        <p class="spnsr-single-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+      <div class="modal-body">
+        <div class="columns">
+          <div class="column col-4"><a href="#">
+              <div class="content-box"></div>
+              <h4 class="mb">Title</h4>
+              <p class="mb">Lorem ipsum dolor sit amet.</p></a></div>
+          <div class="column col-4"><a href="#">
+              <div class="content-box"></div>
+              <h4 class="mb">Title</h4>
+              <p class="mb">Lorem ipsum dolor sit amet.</p></a></div>
+          <div class="column col-4"><a href="#">
+              <div class="content-box"></div>
+              <h4 class="mb">Title</h4>
+              <p class="mb">Lorem ipsum dolor sit amet.</p></a></div>
+          <div class="column col-4"><a href="#">
+              <div class="content-box"></div>
+              <h4 class="mb">Title</h4>
+              <p class="mb">Lorem ipsum dolor sit amet.</p></a></div>
+          <div class="column col-4"><a href="#">
+              <div class="content-box"></div>
+              <h4 class="mb">Title</h4>
+              <p class="mb">Lorem ipsum dolor sit amet.</p></a></div>
+          <div class="column col-4"><a href="#">
+              <div class="content-box"></div>
+              <h4 class="mb">Title</h4>
+              <p class="mb">Lorem ipsum dolor sit amet.</p></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </html>
