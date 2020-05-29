@@ -62,8 +62,8 @@ plugins:
 
 author:
   name   : "Nicola Klemenc"
-  avatar : "/assets/images/klemenc.png"
-  bio    : "Software engineer"
+  avatar : "/assets/images/klemenc.jpg"
+  bio    : "Web developer"
   links:
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
