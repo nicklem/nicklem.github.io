@@ -79,8 +79,8 @@ layout: default
                 <h3>Media</h3>
                 {% for img in page.project_images %}
                 <figure>
-                    <a href="/static/img/{{ img.url }}" title="{{ img.caption }}" target="_blank">
-                        <img src="/static/img/{{ img.url }}" alt="{{ img.caption }}">
+                    <a href="/static/img/{{ img.url }}" title="{{ img.alt | default: img.caption }}" target="_blank">
+                        <img src="/static/img/{{ img.url }}" alt="{{ img.alt | default: img.caption }}">
                     </a>
                     <figcaption>{{ img.caption }}</figcaption>
                 </figure>
