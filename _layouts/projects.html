@@ -6,21 +6,25 @@ layout: archive
 
 {% assign projects = site.categories.Projects %}
 
-<!--
-<ul class="taxonomy__index">
-  {% assign postsInYear = projects | group_by_exp: 'post', 'post.date | date: "%Y"' %}
-  {% for year in postsInYear %}
-    <li>
-      <a href="#{{ year.name }}">
-        <strong>{{ year.name }}</strong> <span class="taxonomy__count">{{ year.items | size }}</span>
-      </a>
-    </li>
-  {% endfor %}
-</ul>
--->
-
 <section id="{{ year.name }}" class="taxonomy__section">
-    <h2 class="site__subtitle">Recent projects</h2>
+
+    <h2 class="site__subtitle">About me</h2>
+    <ul>
+        <li>
+            Web developer with 10+ years’ experience building clean, high-performance websites and interfaces.
+        </li>
+        <li>
+            Skilled in WordPress, React, and static site workflows.
+        </li>
+        <li>
+            Equally comfortable shipping solo or collaborating closely with designers to turn vision into production-ready code.
+        </li>
+        <li>
+            I thrive in mature teams that value clarity, minimalism, and thoughtful process.
+        </li>
+    </ul>
+
+    <h2 class="site__subtitle">Some projects I contributed to</h2>
     <div class="entries-{{ page.entries_layout | default: 'list' }}">
         {% for post in projects %}
         {% include project-single.html type=page.entries_layout %}
