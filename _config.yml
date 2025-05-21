@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Nicola Klemenc - Web Designer & Developer
+title: Nicola Klemenc - Web Developer & Designer
 email:
 description: >- # this means to ignore newlines until "baseurl:"
   Personal portfolio
@@ -63,17 +63,17 @@ plugins:
 author:
   name   : "Nicola Klemenc"
   avatar : "/assets/images/klemenc.jpg"
-  bio    : "Web Designer & Developer"
+  bio    : "Web Developer & Designer"
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/nicola-klemenc-4bb550135/"
+      url: "https://www.linkedin.com/in/nicola-klemenc/"
 
 footer:
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/nicola-klemenc-4bb550135/"
+      url: "https://www.linkedin.com/in/nicola-klemenc/"
 
 defaults:
   # _posts
