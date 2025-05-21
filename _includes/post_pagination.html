@@ -1,0 +1,22 @@
+<nav class="pagination-flex">
+    <div>
+        {% if page.previous %}
+        <a
+                href="{{ page.previous.url | relative_url }}"
+                title="{{ page.previous.title | markdownify | strip_html }}"
+        >
+            &lt; {{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}
+        </a>
+        {% endif %}
+    </div>
+    <div>
+        {% if page.next %}
+        <a
+                href="{{ page.next.url | relative_url }}"
+                title="{{ page.next.title | markdownify | strip_html }}"
+        >
+            {{ site.data.ui-text[site.locale].pagination_next | default: "Next" }} &gt;
+        </a>
+        {% endif %}
+    </div>
+</nav>

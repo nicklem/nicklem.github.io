@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style type="text/css">
+
+        body {
+            margin: 0;
+        }
+
+        section {
+            display: flex;
+
+        }
+
+        section h2 {
+            margin: 2rem auto;
+            font-family: sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            color: #666;
+            letter-spacing: 1rem;
+            font-weight: 100;
+        }
+
+        .wrapper-section {
+            height: 100vh;
+            background-color: #def;
+        }
+
+        .test-section {
+            height: 100vh;
+            background-color: #eee;
+        }
+
+        .test-section:nth-child(odd) {
+            background-color: #ddd;
+        }
+
+        #navigator {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: sans-serif;
+            font-size: 1rem;
+            color: #333;
+            letter-spacing: 0.4rem;
+            font-weight: 100;
+            text-align: right;
+            padding-right: 2rem;
+        }
+
+
+        .navigator-item {
+            transition: margin-bottom 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .navigator-item:last-child {
+            margin-bottom: 2.5rem;
+        }
+
+        .navigator-item--active {
+            margin-bottom: 2.5rem;
+        }
+
+        .navigator-item span {
+            position: relative;
+        }
+
+        .navigator-item span::before {
+            position: absolute;
+            content: '';
+            top: -0.15rem;
+            left: -0.3rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 1.5rem;
+            display: inline-block;
+            margin-left: 1rem;
+            border: 1px solid gray;
+            transform: scale(0);
+            transform-origin: bottom center;
+            transition: transform 0.3s ease;
+        }
+
+        .navigator-item--active span::before {
+            transform: scale(1);
+        }
+
+        .navigator-item span::after {
+            position: absolute;
+            content: '';
+            top: 0.15rem;
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 1rem;
+            display: inline-block;
+            margin-left: 1rem;
+            background: gray;
+        }
+
+        .navigator-item::after {
+            position: absolute;
+            content: '';
+            display: block;
+            border-right: 1px solid gray;
+            height: 2rem;
+            right: 0.6rem;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease;
+        }
+
+        .navigator-item--active::after {
+            transform: scaleY(1);
+        }
+
+        .navigator-item:last-child::after {
+            display: none;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<section class="wrapper-section"><h2>Header</h2></section>
+<section class="test-section"><h2>Sezione 1</h2></section>
+<section class="test-section"><h2>Sezione 2</h2></section>
+<section class="test-section"><h2>Sezione 3</h2></section>
+<section class="test-section"><h2>Sezione 4</h2></section>
+<section class="test-section"><h2>Sezione 5</h2></section>
+<section class="test-section"><h2>Sezione 6</h2></section>
+<section class="wrapper-section"><h2>Footer</h2></section>
+
+<div id="navigator"></div>
+
+<script>
+  window.onload = () => {
+    const nav          = document.querySelector('#navigator');
+    const els          = document.querySelectorAll('.test-section');
+    const elBoundaries = Array.prototype.slice
+      .apply(els)
+      .map((el) => [el.offsetTop, el.offsetTop + el.offsetHeight]);
+
+    els.forEach(el => {
+      const p = document.createElement('p');
+      const helper = document.createElement('span');
+      p.classList.add('navigator-item');
+      p.innerText = el.innerText;
+      p.appendChild(helper);
+      nav.appendChild(p);
+    });
+
+    const navItems = nav.querySelectorAll('.navigator-item');
+    let activeIdx  = -1;
+
+    function updateNavItems () {
+      navItems.forEach((el, idx) => {
+        el.classList.remove('navigator-item--active');
+        if (idx === activeIdx) {
+          el.classList.add('navigator-item--active');
+        }
+      });
+    }
+
+    function calcOffsets() {
+      const h          = window.pageYOffset;
+      const currentIdx = elBoundaries
+        .map(([a, b]) => a <= h && b > h)
+        .findIndex((el) => el);
+      if (currentIdx !== activeIdx) {
+        activeIdx = currentIdx;
+        updateNavItems();
+      }
+    }
+
+    document.addEventListener('scroll', calcOffsets);
+    calcOffsets();
+  };
+</script>
+
+
+</body>
+</html>
