@@ -13,10 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Nicola Klemenc - Software Engineer
+title: Nicola Klemenc - Web Designer & Developer
 email:
 description: >- # this means to ignore newlines until "baseurl:"
-  Articles and notes on computer science
+  Personal portfolio
 # twitter_username: username
 github_username: username
 gitlab_username: username
@@ -63,26 +63,14 @@ plugins:
 author:
   name   : "Nicola Klemenc"
   avatar : "/assets/images/klemenc.jpg"
-  bio    : "Software engineer"
+  bio    : "Web Designer & Developer"
   links:
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      url: "https://gitlab.com/nicklem1"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/nicklem"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/nicola-klemenc-4bb550135/"
 
 footer:
   links:
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      url: "https://gitlab.com/nicklem1"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/nicklem"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/nicola-klemenc-4bb550135/"
