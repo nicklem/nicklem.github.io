@@ -9,7 +9,7 @@ tags:
 # Custom Project meta
 layout: project
 client:
-  - "Greenpeace"
+  - "Greenpeace Southeast Asia"
 agency:
   - '<a href="https://www.lattecreative.com" target="_blank">Latte Creative</a>'
 goal: >-

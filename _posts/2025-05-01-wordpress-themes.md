@@ -30,7 +30,7 @@ project_images:
     caption: '<a href="https://www.arestudio.eu/" target="_blank">Arestudio</a>'
   -
     url: portfolio/wordpress_epropa.jpg
-    alt: ''
+    alt: 'EPROPA - European Program for ROutine testing of Patients with Advanced lung cancer'
     caption: '<a href="https://www.epropa.eu/" target="_blank">Epropa</a>'
   -
     url: portfolio/wordpress_freeyou.jpg
