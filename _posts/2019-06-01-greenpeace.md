@@ -1,7 +1,6 @@
 ---
 title: "Greenpeace Regional Websites"
 slug: planet4-theme-plugin
-excerpt_separator: "<!--more-->"
 categories:
   - Projects
 tags:
@@ -30,8 +29,6 @@ links:
 ---
 
 This project involved adapting and extending WordPress themes and plugins for regional Greenpeace sites in Hong Kong, Taiwan, and South Korea.
-
-<!--more-->
 
 Development focused on integrating with the existing deployment stack while ensuring content flexibility, performance, and brand consistency across locales.
 

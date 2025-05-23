@@ -1,7 +1,6 @@
 ---
 title: "Custom WordPress Themes"
 slug: wordpress-themes
-excerpt_separator: "<!--more-->"
 categories:
   - Projects
 tags:
@@ -43,8 +42,6 @@ project_images:
 ---
 
 A set of WordPress theme implementations developed across different client projects.
-
-<!--more-->
 
 Each build reflects the specific structure, layout, and content needs of the site, while maintaining a consistent focus on performance, clarity, and ease of use.
 
