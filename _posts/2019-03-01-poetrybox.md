@@ -4,7 +4,8 @@ slug: lstm-poetry-generator
 categories:
   - Projects
 tags:
-  - Exhibit
+  - Python/Flask
+  - JS/Vanilla
 # Custom Project meta
 layout: project
 client:

@@ -4,7 +4,7 @@ slug: wordpress-themes
 categories:
   - Projects
 tags:
-  - WordPress
+  - PHP/WordPress
 # Custom Project meta
 layout: project
 client:

@@ -2,11 +2,5 @@ main:
   - title: "Home"
     url: /
     class: "test"
-#  - title: "Blog"
-#    url: /blog/
-#  - title: "Categories"
-#    url: /categories/
-  - title: "Projects by Type"
+  - title: "Projects by Tech"
     url: /tags/
-#  - title: "About"
-#    url: /about/

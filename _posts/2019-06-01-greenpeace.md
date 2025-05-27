@@ -4,7 +4,7 @@ slug: planet4-theme-plugin
 categories:
   - Projects
 tags:
-  - WordPress
+  - PHP/WordPress
 # Custom Project meta
 layout: project
 client:
