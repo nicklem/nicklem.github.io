@@ -5,33 +5,36 @@
   {% endif %}
 {% endfor %}
 
+{% assign hash_keys = "" | split: "" %}
+{% for pair in include.taxonomies %}
+  {% assign new_item = pair[0] %}
+  {% assign hash_keys = hash_keys | push: new_item %}
+{% endfor %}
+{% assign sorted_keys = hash_keys | sort %}
+
 <ul class="taxonomy__index">
-  {% for i in (1..items_max) reversed %}
-    {% for item in include.taxonomies %}
-      {% if item[1].size == i %}
-        <li>
-          <a href="#{{ item[0] | slugify }}">
-            <strong>{{ item[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
-          </a>
-        </li>
-      {% endif %}
-    {% endfor %}
+  {% for tax_key in sorted_keys %}
+    {% assign tax_item = include.taxonomies %}
+    {% assign tax_posts = tax_item[tax_key] %}
+    <li>
+      <a href="#{{ tax_key | slugify }}">
+        <strong>{{ tax_key }}</strong> <span class="taxonomy__count">{{ tax_posts | size }}</span>
+      </a>
+    </li>
   {% endfor %}
 </ul>
 
 {% assign entries_layout = page.entries_layout | default: 'list' %}
-{% for i in (1..items_max) reversed %}
-  {% for taxonomy in include.taxonomies %}
-    {% if taxonomy[1].size == i %}
-      <section id="{{ taxonomy[0] | slugify }}" class="taxonomy__section">
-        <h2 class="archive__subtitle">{{ taxonomy[0] }}</h2>
-        <div class="entries-{{ entries_layout }}">
-          {% for post in taxonomy.last %}
-            {% include archive-single.html type=entries_layout %}
-          {% endfor %}
-        </div>
-        <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
-      </section>
-    {% endif %}
-  {% endfor %}
+{% for tax_key in sorted_keys %}
+{% assign tax_item = include.taxonomies %}
+{% assign tax_posts = tax_item[tax_key] %}
+<section id="{{ tax_key | slugify }}" class="taxonomy__section">
+  <h2 class="archive__subtitle">{{ tax_key }}</h2>
+  <div class="entries-{{ entries_layout }}">
+    {% for post in tax_posts %}
+    {% include archive-single.html type=entries_layout %}
+    {% endfor %}
+  </div>
+  <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
+</section>
 {% endfor %}
