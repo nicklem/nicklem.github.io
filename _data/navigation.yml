@@ -2,5 +2,5 @@ main:
   - title: "Home"
     url: /
     class: "test"
-  - title: "Projects by Tech"
+  - title: "Technologies"
     url: /tags/

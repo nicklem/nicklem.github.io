@@ -1,5 +1,5 @@
 ---
-title: "Projects by Tech"
+title: "Technologies"
 permalink: /tags/
 layout: tags
 author_profile: true
